@@ -262,23 +262,4 @@ def ASMtoBYTE(source, boot=False, offset=0):
     
     return b
 
-ASMtoBYTE("roms/test.lep")
-
-if 1 == 0:
-    subprocess.call([r'C:\Users\kilom\OneDrive\Desktop\TBD_Computer\Hardware\Emulator\build\build.bat'])
-
-"""
-g++ "../src/main.cpp" -o "main.exe"
-
-char convert[128] = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e',
-                    'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
-                    'u', 'v', 'w', 'x', 'y', 'z', '0', '[', ']', ',', '.', '-', '=', '`','\\',
-                    '/','\'', ';', 219, 223, 254, 220, '✔', '→', '←', '↑', '↓', 196, 193, 195,
-                    ' ','\t', ' ','\n',
-                    255, '!', '@', '#', '$', '%', '^', '&', '*', '(', 'A', 'B', 'C', 'D', 'E',
-                    'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
-                    'U', 'V', 'W', 'X', 'Y', 'Z', ')', '{', '}', '<', '>', '_', '+', '~', 179,
-                    '?', '"', ':', '◤', '◢', '◣', '◥', '✘', 217, 192, 218, 119, 197, 194, 180,
-                    ' ','\t', ' ','\n'};
-
-"""
+ASMtoBYTE("file.lep")
