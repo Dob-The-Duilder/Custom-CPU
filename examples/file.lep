@@ -1,0 +1,237 @@
+NOOP
+
+JUMPPOINT Refresh
+
+#  ██┐     ███████┐██████┐ ████████┐      ██████┐ ███████┐
+#  ██|     ██┌────┘██┌──██┐└──██┌──┘     ██┌───██┐██┌────┘
+#  ██|     █████┐  ██████┌┘   ██| █████┐ ██|   ██|███████┐
+#  ██|     ██┌──┘  ██┌───┘    ██| └────┘ ██|   ██|└────██|
+#  ███████┐███████┐██|        ██|        └██████┌┘███████|
+#  └──────┘└──────┘└─┘        └─┘         └─────┘ └──────┘
+
+printf "          ██┐     ███████┐██████┐ ████████┐      ██████┐ ███████┐\n"
+printf "          ██|     ██┌────┘██┌──██┐└──██┌──┘     ██┌───██┐██┌────┘\n"
+printf "          ██|     █████┐  ██████┌┘   ██| █████┐ ██|   ██|███████┐\n"
+printf "          ██|     ██┌──┘  ██┌───┘    ██| └────┘ ██|   ██|└────██|\n"
+printf "          ███████┐███████┐██|        ██|        └██████┌┘███████|\n"
+printf "          └──────┘└──────┘└─┘        └─┘         └─────┘ └──────┘\n"
+
+JUMPPOINT NewLine
+printf " > "
+
+Load c 0x03
+
+#   LOOP START
+JUMPIN
+    JUMPIN
+        Increment c
+        Receive a
+        Store a $ c
+    JUMPIF (a == 0x3F)
+
+    Decrement c
+    Load a $ c
+    IF (a == 0x2F)
+        Jump FuncCheck :: JUMPPOINT FuncReturn
+    END
+    Jump NewLine
+Jump
+
+
+JUMPPOINT FuncCheck
+
+Load c 0x04
+Load a $ c
+
+IF (a == 'h')
+    Increment c
+    Load a $ c
+    IF (a == 'a')
+        Increment c
+        Load a $ c
+        IF (a == 'l')
+            Increment c
+            Load a $ c
+            IF (a == 't')
+                Increment c
+                Load a $ c
+                IF (a == '(')
+                    Increment c
+                    Load a $ c
+                    IF (a == ')')
+                        HALT
+                    END
+                END
+            END
+        END
+    END
+END
+
+IF (a == 'j')
+    Increment c
+    Load a $ c
+    IF (a == 'u')
+        Increment c
+        Load a $ c
+        IF (a == 'm')
+            Increment c
+            Load a $ c
+            IF (a == 'p')
+                Increment c
+                Load a $ c
+                IF (a == '(')
+                    Load d 0x00
+                    JUMPIN
+                        MATH d = d < 0x04
+
+                        Increment c
+                        Load a $ c
+                        
+                        MATH a = 0x3F & a
+
+                        IF (a == '0')
+                            Load a 0x00
+                        END
+
+                        MATH d = a + d
+
+                    JUMPIF (c >= 0x0C)
+                    Increment c
+                    Load a $ c
+                    IF (a == ')')
+                        Load pc << d
+                    END
+                END
+            END
+        END
+    END
+END
+
+IF (a == 'p')
+    Increment c
+    Load a $ c
+    IF (a == 'e')
+        Increment c
+        Load a $ c
+        IF (a == 'e')
+            Increment c
+            Load a $ c
+            IF (a == 'k')
+                Increment c
+                Load a $ c
+                IF (a == '(')
+                    Load d 0x00
+                    JUMPIN
+                        MATH d = d < 0x04
+
+                        Increment c
+                        Load a $ c
+                        
+                        IF (a == '0')
+                            Load a 0x00
+                        END
+
+                        MATH d = a + d
+
+                    JUMPIF (c >= 0x0C)
+                    Increment c
+                    Load a $ c
+                    IF (a == ')')
+                        Load c $ d
+
+                        MATH a = c > 12
+                        MATH a = a & 15
+
+                        IF (a == 0)
+                            Load a '0'
+                        END                        
+                        Send a
+
+                        MATH a = c > 08
+                        MATH a = a & 15
+
+                        IF (a == 0)
+                            Load a '0'
+                        END                  
+                        Send a
+
+                        MATH a = c > 04
+                        MATH a = a & 15
+
+                        IF (a == 0)
+                            Load a '0'
+                        END                   
+                        Send a
+                        
+                        MATH a = c & 15
+
+                        IF (a == 0)
+                            Load a '0'
+                        END                   
+                        Send a
+
+                        Send 0x3F
+                    END
+                END
+            END
+        END
+    END
+    
+    IF (a == 'o')
+        Increment c
+        Load a $ c
+        IF (a == 'k')
+            Increment c
+            Load a $ c
+            IF (a == 'e')
+                Increment c
+                Load a $ c
+                IF (a == '(')
+                    Load d 0x00
+                    JUMPIN
+                        MATH d = d < 0x04
+
+                        Increment c
+                        Load a $ c
+                        
+                        IF (a == '0')
+                            Load a 0x00
+                        END
+
+                        MATH d = a + d
+
+                    JUMPIF (c >= 0x0C)
+                    Store d $0x00
+                    Increment c
+                    Load a $ c
+                    IF (a == ',')
+                        Load d 0x00
+                        JUMPIN
+                            MATH d = d < 0x04
+
+                            Increment c
+                            Load a $ c
+                            
+                            IF (a == '0')
+                                Load a 0x00
+                            END
+
+                            MATH d = a + d
+
+                        JUMPIF (c >= 0x11)
+                        Increment c
+                        Load a $ c
+                        IF (a == ')')
+                            Load c $0x00
+                            Store d $ c
+                        END
+                    END
+                END
+            END
+        END
+    END
+END
+
+Jump FuncReturn
+
+HALT
