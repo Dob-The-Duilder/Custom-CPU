@@ -17,11 +17,12 @@
 | 10 | Send value |   |Upper 8 bits of Value| Lower 8 bits of Value|
 | 11 | Send from REG| Register (0-8)    |   |
 | 12 | Receive into REG| Register (0-7) |   |   |
-| D |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
-|   |   |   |   |   |
+| 13 | Jump |   |Upper 8 bits of Value| Lower 8 bits of Value|
+| 14 | Jump if ALU zero |   |Upper 8 bits of Value| Lower 8 bits of Value|
+| 15 | Jump if not ALU zero |   |Upper 8 bits of Value| Lower 8 bits of Value|
+| 16 | Jump if ALU carry |   |Upper 8 bits of Value| Lower 8 bits of Value|
+| 17 | Increment REG | Register (0-7) |   |   |
+| 18 | Decrement REG | Register (0-7) |   |   |
+| 19 |   |   |   |   |
+| … |   |   |   |   |
+| 255 | HALT |   |   |   |
