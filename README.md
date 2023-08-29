@@ -1,11 +1,12 @@
 ## Instruction set and basic architecture 
 The following list numbers coris
 
+(Empty column means unassigned/unnecessary)
 | Inst. # | Command Name  | Input 1	| Input 2	| Input 3 |
 |---|---|---|---|---|
-| 0 |   |   |   |   |
-| 1 |   |   |   |   |
-| 2 |   |   |   |   |
+| 0 | NOOP |   |   |   |
+| 1 |    |   |   |   |
+| 2 | SWAP |   |   |   |
 | 3 |   |   |   |   |
 | 4 |   |   |   |   |
 | 5 |   |   |   |   |
