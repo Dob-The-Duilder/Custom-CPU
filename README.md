@@ -13,12 +13,12 @@
 - SR : Stat Register
 	- Bits 13-15 reserved for ALU flags. Read only.
 	- Sub-section Breakdown
-			- Bits 0-7: IO select, can be set directly by "Set IO" (Instruction 10).
-			- Bits 8-11: ALU operation select, can be set directly by "Set ALU" (Instruction 9).
-			- Bit 12: SWAP flag, used to swap highest bit of memory addresses to increase total memory.
-			- Bit 13: ALU carry flag.
-			- Bit 14: ALU zero flag.
-			- Bit 15: ALU not zero flag.
+		- Bits 0-7: IO select, can be set directly by "Set IO" (Instruction 10).
+		- Bits 8-11: ALU operation select, can be set directly by "Set ALU" (Instruction 9).
+		- Bit 12: SWAP flag, used to swap highest bit of memory addresses to increase total memory.
+		- Bit 13: ALU carry flag.
+		- Bit 14: ALU zero flag.
+		- Bit 15: ALU not zero flag.
 - PC: Program Counter
 	- Current position of the CPU is executing from.
 	- Can be set like any other register.
