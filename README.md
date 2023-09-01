@@ -6,7 +6,7 @@
  -  A, B : Math Registers
 	- The registers used when preforming math operations. Result automatically put into AO register.
 	-  A is always the primary number in the operation.
-			- A - B,   A % B,	!A 
+		- A - B,   A % B,	!A 
 - C, D, E, F : General Purpose Registers
 	- Simply store a value.
 	- Can be used for stack pointers.
