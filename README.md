@@ -9,7 +9,6 @@
 		- A - B,   A % B,	!A 
 - C, D, E, F : General Purpose Registers
 	- Simply store a value.
-	- Can be used for stack pointers.
 - SR : Stat Register
 	- Bits 13-15 reserved for ALU flags. Read only.
 	- Sub-section Breakdown
