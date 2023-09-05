@@ -44,7 +44,7 @@
 | 11 | Send value |   |Upper 8 bits of Value| Lower 8 bits of Value
 | 12 | Send from REG| Register (0-8)
 | 13 | Receive into REG| Register (0-7)
-| 14 | Jump |   |Upper 8 bits of Value| Lower 8 bits of Value
+| 14 |
 | 15 | Jump if ALU zero |   |Upper 8 bits of Value| Lower 8 bits of Value
 | 16 | Jump if not ALU zero |   |Upper 8 bits of Value| Lower 8 bits of Value
 | 17 | Jump if ALU carry |   |Upper 8 bits of Value| Lower 8 bits of Value
