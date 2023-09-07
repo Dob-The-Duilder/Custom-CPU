@@ -24,7 +24,23 @@
 - AO: ALU Output
 	- **Read only**
 	- Automatically set based on inputs from registers A, B, and SR.
-
+## ALU Operations
+- 0. Modulos
+- 1. Division
+- 2. Multiplication
+- 3. Subtraction
+- 4. Addition
+- 5. (Unused)
+- 6. Greater Than
+- 7. Less Than
+- 8. Rotate Right
+- 9. Rotate Left
+- A. Shift Right
+- B. Shift Left
+- C. Bitwise NOT
+- D. Bitwise XOR
+- E. Bitwise OR
+- F. Bitwise AND
 
 ## Instructions
 | Inst. # | Command Name  | Input 1	| Input 2	| Input 3 
