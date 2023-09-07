@@ -27,7 +27,6 @@
 
 
 ## Instructions
-(Empty column means unassigned/unnecessary)
 | Inst. # | Command Name  | Input 1	| Input 2	| Input 3 
 |---|---|---|---|---
 | 0 | NOOP
