@@ -1,4 +1,5 @@
 
+
 # Instruction set and basic architecture 
 
 ## Registers | All registers are 16 bit
@@ -25,22 +26,16 @@
 	- **Read only**
 	- Automatically set based on inputs from registers A, B, and SR.
 ## ALU Operations
-- 0. Modulos
-- 1. Division
-- 2. Multiplication
-- 3. Subtraction
-- 4. Addition
-- 5. (Unused)
-- 6. Greater Than
-- 7. Less Than
-- 8. Rotate Right
-- 9. Rotate Left
-- A. Shift Right
-- B. Shift Left
-- C. Bitwise NOT
-- D. Bitwise XOR
-- E. Bitwise OR
-- F. Bitwise AND
+- Numbers corispond to what the ALU operation select flag should be set to for a given operation.
+
+|   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+|---|---|---|---|---|---|---|---|---|
+|Name| Modulus | Division | Multiplication | Subtraction | Addition | (Unused) | Greater Than | Less Than |
+| Operand | % | / | * | - | + |   | > | < |
+||||||||||
+|   | 8 | 9 | A | B | C | D | E | F | 
+| Name | Rotate Right | Rotate Left | Shift Right | Shift Left | Bitwise NOT | Bitwise XOR | Bitwise OR | Bitwise AND|
+| Operand | } | { | ) | ( | ! | ^ | &#124; | & |
 
 ## Instructions
 | Inst. # | Command Name  | Input 1	| Input 2	| Input 3 
