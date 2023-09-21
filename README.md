@@ -58,9 +58,9 @@
 | 15 | Jump if ALU zero |   |Upper 8 bits of Value| Lower 8 bits of Value
 | 16 | Jump if not ALU zero |   |Upper 8 bits of Value| Lower 8 bits of Value
 | 17 | Jump if ALU carry |   |Upper 8 bits of Value| Lower 8 bits of Value
-| 18 | Jump if ALU zero to REG Addr.||| Register (0-8) |
-| 19 | Jump if not ALU zero to REG Addr.||| Register (0-8) |
-| 20 | Jump if ALU carry to REG Addr.||| Register (0-8) |
+| 18 | Jump if ALU zero to REG Addr.||| Addr. Register (0-8) |
+| 19 | Jump if not ALU zero to REG Addr.||| Addr. Register (0-8) |
+| 20 | Jump if ALU carry to REG Addr.||| Addr. Register (0-8) |
 | 21 | Increment REG | Register (0-7) |   |   |
 | 22 | Decrement REG | Register (0-7) |   |   |
 | … |   |   |   |   |
