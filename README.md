@@ -27,6 +27,7 @@
 	- Automatically set based on inputs from registers A, B, and SR.
 ## ALU Operations
 - Numbers corispond to what the ALU operation select flag should be set to for a given operation.
+- All operators needed to be a single character, some may have unusual or non-standard operands
 
 |   | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 |---|---|---|---|---|---|---|---|---|
