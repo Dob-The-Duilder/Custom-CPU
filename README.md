@@ -15,7 +15,7 @@
 	- Sub-section Breakdown
 		- Bits 0-7: IO select, can be set directly by "Set IO" (Instruction 10).
 		- Bits 8-11: ALU operation select, can be set directly by "Set ALU" (Instruction 9).
-		- Bit 12: SWAP flag, used to swap highest bit of memory addresses to increase total memory.
+		- Bit 12: SWAP flag, Exposed outside of CPU, can be set via "SWAP" (Instruction 2).
 		- Bit 13: ALU carry flag.
 		- Bit 14: ALU zero flag.
 		- Bit 15: ALU not zero flag.
