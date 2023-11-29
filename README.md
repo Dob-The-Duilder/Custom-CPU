@@ -33,9 +33,8 @@
 |---|---|---|---|---|---|---|---|---|
 |Name| Modulus | Division | Multiplication | Subtraction | Addition | (Unused) | Greater Than | Less Than |
 | Operand | % | / | * | - | + |   | > | < |
-
+||||
 |   | 8 | 9 | A | B | C | D | E | F |
-|---|---|---|---|---|---|---|---|---|
 | Name | Rotate Right | Rotate Left | Shift Right | Shift Left | Bitwise NOT | Bitwise XOR | Bitwise OR | Bitwise AND|
 | Operand | } | { | ) | ( | ! | ^ | &#124; | & |
 
