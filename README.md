@@ -64,5 +64,6 @@
 | 20 | Jump if ALU carry to REG Addr.||| Addr. Register (0-8) |
 | 21 | Increment REG | Register (0-7) |   |   |
 | 22 | Decrement REG | Register (0-7) |   |   |
+| 23 | Send from Addr. ||Upper 8 bits of Address | Lower 8 bits of Address
 | … |   |   |   |   |
 | 255 | HALT |   |   |   |
