@@ -1,0 +1,506 @@
+VAR allocationSize = 40040
+
+#printf " 123456789abcdefghijklmnopqrstuvwxyz0[],.-=`\/';█▀■▄✔→←↑↓ ─┴├ \t\b\n !@#$%^&*(ABCDEFGHIJKLMNOPQRSTUVWXYZ){}<>_+~|?\":◤◢◣◥✘┘└┌┐┼┬┤ \t\b\n"
+Load a 40
+JUMPIN
+    Store a 0x3E
+    MATH a = a + 40
+JUMPIF (a >= allocationSize)
+Load f 0x00
+JUMPIN
+    printf " > "
+    JUMPIN
+        Receive a
+        Store a $ f
+        Increment f
+    JUMPIF (a == 0x3F)
+
+    Jump FuncCheck :: JUMPPOINT FuncReturn
+    Load f 0x00
+Jump
+
+JUMPPOINT FuncCheck
+Load f 0x00
+Load e $ f
+IF (9 >= e)
+    Load d 0x00
+    # Read in decimal number of n length
+    JUMPIN
+        MATH d = d * 10
+        MATH d = d + e
+
+        Increment f
+        Load e $ f
+        IF (0x00 == e)
+            Load e 0x64
+            Load b 0x64
+        END
+        IF ('0' == e)
+            Load e 0x00
+            Load b 0x00
+        END
+    JUMPIF (b >= '9')
+
+    # Clamp value to below 1500, then multiply by line length
+    IF (d >= 1500)
+        printf "Line number excedes 1500\n"
+        Jump FuncReturn
+    END
+    MATH d = d * 40
+    
+    # Store rest of line into memory based on d pointer
+    JUMPIN
+        Increment f
+        Load e $ f
+        Store e $ d
+        Increment d
+    JUMPIF (e == 0x3F)
+    Load e 0x3E
+    Store e $ d
+END
+
+#   log function
+Load a $ f
+IF (a == 'l')
+    Increment f
+    Load a $ f
+    IF (a == 'o')
+        Increment f
+        Load a $ f
+        IF (a == 'g')
+            Load f 40
+            JUMPIN
+                Load d << f
+                JUMPIN
+                    Load a $ d
+                    Increment d
+                    IF (a != 0x3E)
+                        Send a
+                    END
+                JUMPIF (a == 0x3E)
+
+                MATH f = f + 40
+            JUMPIF (f >= allocationSize)
+        END
+    END
+END
+
+#   run functions
+IF (a == 'r')
+    Increment f
+    Load a $ f
+    IF (a == 'u')
+        Increment f
+        Load a $ f
+        IF (a == 'n')
+            Load f 40
+            JUMPIN
+                Load d << f
+                Load a $ d
+
+                #   LET function
+                IF (a == 'L')
+                    Increment d
+                    Load a $ d
+                    IF (a == 'E')
+                        Increment d
+                        Load a $ d
+                        IF (a == 'T')
+                            Increment d
+                            Load a $ d
+                            IF (a == 0)
+                                Increment d
+                                Load a $ d
+                                IF (a > 9)
+                                    IF (a < 36)
+                                        MATH a = a - 10
+                                        MATH a = a * 40
+                                        MATH e = a + allocationSize
+
+                                        Increment d 
+                                        Load a $ d
+                                        IF (a == 0)
+                                            Increment d 
+                                            Load a $ d
+                                            IF (a == '=')
+                                                Increment d 
+                                                Load a $ d
+                                                IF (a == 0)
+                                                    Increment d 
+                                                    Load a $ d
+                                                    IF (a == '"')
+                                                        Load a 'S'
+                                                        Store a $ e
+                                                        Increment e
+                                                        Increment d
+                                                        Load a $ d
+                                                        JUMPIN
+                                                            Store a $ e
+                                                            Increment e
+                                                            Increment d
+                                                            Load a $ d
+                                                        JUMPIF (a == '"')
+                                                        Load a '\b'
+                                                        Store a $ e
+                                                    END
+                                                    IF (a == '0')
+                                                        Load a 0x00
+                                                    END
+                                                    IF (a < 10)
+                                                        Store f $0xFFFF
+                                                        Load f << b
+                                                        Load c 0x00
+                                                        JUMPIN
+                                                            MATH b = 10 * c
+                                                            MATH c = f + b
+
+                                                            Increment d
+                                                            Load f $ d
+                                                            IF (f == 0x00)
+                                                                Load a 0x64
+                                                            END
+                                                            IF (a == '0')
+                                                                Load a 0x00
+                                                                Load f 0x00
+                                                            END
+                                                        JUMPIF (a >= '9')
+                                                        Load b 'I'
+                                                        Store b $ e
+                                                        Increment e
+                                                        Store c $ e
+                                                        Load f $0xFFFF
+                                                    END
+                                                END
+                                            END
+                                        END
+                                    END
+                                END
+                            END
+                        END
+                    END
+                END
+                #   IF, INPUT
+                IF (a == 'I')
+                    Increment d
+                    Load a $ d
+                    IF (a == 'F')
+                        Increment d
+                        Load a $ d
+                        IF (a == 0)
+                            NOOP
+                        END
+                    END
+                    IF (a == 'N')
+                        Increment d
+                        Load a $ d
+                        IF (a == 'P')
+                            Increment d
+                            Load a $ d
+                            IF (a == 'U')
+                                Increment d
+                                Load a $ d
+                                IF (a == 'T')
+                                    Increment d
+                                    Load a $ d
+                                    IF (a == 0)
+                                        Increment d
+                                        Load a $ d
+                                        MATH a = a - 10
+                                        MATH a = a * 40
+                                        MATH e = a + allocationSize
+
+                                        Increment d
+                                        Load a 0
+                                        Load c 0
+                                        JUMPIN
+                                            Receive a
+                                            Store a $ c
+                                            Increment c
+                                        JUMPIF (a == 0x3F)
+
+                                        Load c 0
+                                        Load a $ c
+                                        IF (a == '"')
+                                            Load a 'S'
+                                            Store a $ e
+                                            Increment e
+                                            Increment c
+                                            Load a $ c
+                                            JUMPIN
+                                                Store a $ e
+                                                Increment e
+                                                Increment c
+                                                Load a $ c
+                                            JUMPIF (a == '"')
+                                            Load a '\b'
+                                            Store a $ e
+                                        END
+                                        IF (a == '0')
+                                            Load a 0x00
+                                        END
+                                        IF (a < 10)
+                                            Store f $0xFFFF
+                                            Store d $0xFFFD
+                                            Load f << b
+                                            Load d 0x00
+                                            JUMPIN
+                                                MATH b = 10 * d
+                                                MATH d = f + b
+
+                                                Increment c
+                                                Load f $ c
+                                                IF (f == 0x00)
+                                                    Load a 0x64
+                                                END
+                                                IF (a == '0')
+                                                    Load a 0x00
+                                                    Load f 0x00
+                                                END
+                                            JUMPIF (a >= '9')
+                                            Load b 'I'
+                                            Store b $ e
+                                            Increment e
+                                            Store d $ e
+                                            Load f $0xFFFF
+                                            Load d $0xFFFD
+                                        END
+                                    END
+                                END
+                            END
+                        END
+                    END
+                END
+                #   PRINT function
+                IF (a == 'P')
+                    Increment d
+                    Load a $ d
+                    IF (a == 'R')
+                        Increment d
+                        Load a $ d
+                        IF (a == 'I')
+                            Increment d
+                            Load a $ d
+                            IF (a == 'N')
+                                Increment d
+                                Load a $ d
+                                IF (a == 'T')
+                                    Increment d
+                                    Load a $ d
+                                    IF (a == 0)
+                                        JUMPPOINT printNext
+                                        Increment d
+                                        Load a $ d
+                                        IF (a == '"')
+                                            Increment d
+                                            Load a $ d
+                                            JUMPIN
+                                                Send a
+                                                Increment d
+                                                Load a $ d
+                                            JUMPIF (a == '"')
+                                            Increment d
+                                            Load a $ d
+                                        END
+                                        IF (a > 9)
+                                            IF (a < 36)
+                                                MATH a = a - 10
+                                                MATH a = a * 40
+                                                MATH e = a + allocationSize
+
+                                                Load a $ e
+                                                IF (a == 'S')
+                                                    Increment e
+                                                    Load a $ e
+                                                    JUMPIN
+                                                        Send a
+                                                        Increment e
+                                                        Load a $ e
+                                                    JUMPIF (a == '\b')
+                                                END
+                                                IF (a == 'I')
+                                                    Increment e
+                                                    Load c $ e
+
+                                                    MATH a = c / 10000
+                                                    IF (a == 0)
+                                                        Load a '0'
+                                                    END
+                                                    Send a
+                                                    IF (a == '0')
+                                                        Load a 0
+                                                    END
+                                                    MATH b = a * 10000
+                                                    MATH c = c - b
+
+                                                    MATH a = c / 1000
+                                                    IF (a == 0)
+                                                        Load a '0'
+                                                    END
+                                                    Send a
+                                                    IF (a == '0')
+                                                        Load a 0
+                                                    END
+                                                    MATH b = a * 1000
+                                                    MATH c = c - b
+
+                                                    MATH a = c / 100
+                                                    IF (a == 0)
+                                                        Load a '0'
+                                                    END                        
+                                                    Send a
+                                                    IF (a == '0')
+                                                        Load a 0
+                                                    END
+                                                    MATH b = a * 100
+                                                    MATH c = c - b
+
+                                                    MATH a = c / 10
+                                                    IF (a == 0)
+                                                        Load a '0'
+                                                    END                        
+                                                    Send a
+                                                    IF (a == '0')
+                                                        Load a 0
+                                                    END
+                                                    MATH b = a * 10
+                                                    MATH a = c - b
+                                                    
+                                                    IF (a == 0)
+                                                        Load a '0'
+                                                    END
+                                                    Send a
+                                                END
+                                                Increment d
+                                                Load a $ d
+                                            END
+                                        END
+                                        IF (a == '0')
+                                            Load a 0x00
+                                        END
+                                        IF (a < 10)
+                                            JUMPIN
+                                                Send a
+                                                Increment d
+                                                Load a $ d
+                                                IF (a == 0)
+                                                    Load a 0x64
+                                                END
+                                                IF (a == '0')
+                                                    Load a 0x00
+                                                END
+                                            JUMPIF (a >= '9')
+                                            Increment d
+                                            Load a $ d
+                                        END
+                                        Load a $ d
+                                        IF (a == ';')
+                                            Increment d
+                                            Jump printNext
+                                        END
+                                        Send '\n'
+                                    END
+                                END
+                            END
+                        END
+                    END
+                END
+                #   GOTO function
+                IF (a == 'G')
+                    Increment d
+                    Load a $ d
+                    IF (a == 'O')
+                        Increment d
+                        Load a $ d
+                        IF (a == 'T')
+                            Increment d
+                            Load a $ d
+                            IF (a == 'O')
+                                Increment d
+                                Load a $ d
+                                IF (a == 0)
+                                    Load c 0
+                                    Load e 0
+                                    JUMPIN
+                                        MATH c = c * 10
+                                        MATH c = c + e
+
+                                        Increment d
+                                        Load e $ d
+                                        IF (0x00 == e)
+                                            Load e 0x64
+                                            Load b 0x64
+                                        END
+                                        IF ('0' == e)
+                                            Load e 0x00
+                                            Load b 0x00
+                                        END
+                                    JUMPIF (b >= '9')
+                                    IF (c != 0)
+                                        Decrement c
+                                        MATH f = c * 40
+                                    END
+                                END
+                            END
+                        END
+                    END
+                END
+                #   END function
+                IF (a == 'E')
+                    Increment d
+                    Load a $ d
+                    IF (a == 'N')
+                        Increment d
+                        Load a $ d
+                        IF (a == 'D')
+                            Jump FuncReturn
+                        END
+                    END
+                END
+                #   STOP function
+                IF (a == 'S')
+                    Increment d
+                    Load a $ d
+                    IF (a == 'T')
+                        Increment d
+                        Load a $ d
+                        IF (a == 'O')
+                            Increment d
+                            Load a $ d
+                            IF (a == 'P')
+                                Jump FuncReturn
+                            END
+                        END
+                    END
+                END
+
+                MATH f = f + 40
+                IF (f >= allocationSize)
+                    Load f 40
+                END
+            Jump
+        END
+    END
+END
+
+#   halt function
+IF (a == 'h')
+    Increment f
+    Load a $ f
+    IF (a == 'a')
+        Increment f
+        Load a $ f
+        IF (a == 'l')
+            Increment f
+            Load a $ f
+            IF (a == 't')
+                Increment f
+                Load a $ f
+                IF (a == '\n')
+                    HALT
+                END
+            END
+        END
+    END
+END
+Jump FuncReturn
+HALT
