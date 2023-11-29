@@ -21,10 +21,9 @@ void print(vector<string> const &input)
 	cout << endl;
 }
 
-void print_window(StateH32* state, vector<string> h_buffer, int offset = 0)
+void print_window(StateH32* state, vector<string> h_buffer, int offset = 0, bool clear = false)
 {
-
-	system("cls");
+	if (!clear) system("cls");
 
 	cout << (char)218<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)194<<(char)196<<(char)196<<(char)194<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)194<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)196<<(char)191
 	     << "|a:"<< right << setw(5) << setfill('-') << dec <<state->a << " ALU:" << opSwap[state->sr.ao] 				  	   << "|  |c:" << right << setw(5) << setfill('-') << state->c << " d:" << right << setw(5) << setfill('-') << state->d << " e:" << right << setw(5) << setfill('-') << state->e  <<"| "<< setw(4) << setfill('0') << hex <<     offset <<": "<< setw(4) << setfill('0') << hex << state->ram[    offset] <<" "<< setw(4) << setfill('0') << hex << state->ram[1 + offset] <<" "<< setw(4) << setfill('0') << hex << state->ram[2 + offset] <<" "<< setw(4) << setfill('0') << hex << state->ram[3 + offset] <<" "<< setw(4) << setfill('0') << hex << state->ram[4 + offset] <<" "<< setw(4) << setfill('0') << hex << state->ram[5 + offset] <<" |"
@@ -84,7 +83,7 @@ StateH32* InitH32(void)
 	return state;
 }
 
-int EmulateH32(StateH32* state, int offset, queue<char> &inputBuffer, vector<string> &h_buffer)
+int EmulateH32(StateH32* state, int offset, queue<char> &inputBuffer, vector<string> &h_buffer, bool debug)
 {
 	struct OpCode *opcode = &state->rom[state->pc];
 
@@ -158,7 +157,7 @@ int EmulateH32(StateH32* state, int offset, queue<char> &inputBuffer, vector<str
 				{
 					h_buffer.insert(h_buffer.begin(), "");
 					h_buffer.pop_back();
-					print_window(state, h_buffer, offset);
+					print_window(state, h_buffer, offset, debug);
 				}
 			}
 			break;
@@ -177,7 +176,7 @@ int EmulateH32(StateH32* state, int offset, queue<char> &inputBuffer, vector<str
 				{
 					h_buffer.insert(h_buffer.begin(), "");
 					h_buffer.pop_back();
-					print_window(state, h_buffer, offset);
+					print_window(state, h_buffer, offset, debug);
 				}
 			}
 			break;
@@ -189,7 +188,7 @@ int EmulateH32(StateH32* state, int offset, queue<char> &inputBuffer, vector<str
 			char tempInput[40];
 			if (inputBuffer.empty())
 			{
-				print_window(state, h_buffer, offset);
+				print_window(state, h_buffer, offset, debug);
 				cin.get(tempInput, 40);cin.get();
 				for(int i = 0; i < strlen(tempInput); i++)
 				{
@@ -202,29 +201,63 @@ int EmulateH32(StateH32* state, int offset, queue<char> &inputBuffer, vector<str
 				h_buffer.insert(h_buffer.begin(), "");
 				h_buffer.pop_back();
 				inputBuffer.push(63);
-				print_window(state, h_buffer, offset);
+				print_window(state, h_buffer, offset, debug);
 			}
 			*ad = inputBuffer.front();
 			inputBuffer.pop();
 			break;
 		}
-		case 0x0E:			//	Conditionless Jump
-			state->pc = (opcode->p2 << 8) + opcode->p3; 
+		case 0x0E:
+		{
+			unsigned short * ad = &state->a;
+			ad += opcode->p1;
+			state->ram[*ad] = (state->sr.ms << 16) + (opcode->p2 << 8) + opcode->p3;
 			break;
+		}
 		case 0x0F:			//	If Accumulator == 0, Jump
 			if(state->sr.az) state->pc = (opcode->p2 << 8) + opcode->p3; break;
 		case 0x10:			//	If Accumulator != 0, Jump
 			if(state->sr.nz) state->pc = (opcode->p2 << 8) + opcode->p3; break;
 		case 0x11:			//	If Accumulator Carry, Jump
 			if(state->sr.ac) state->pc = (opcode->p2 << 8) + opcode->p3; break;
-		case 0x12: 			//	Increment Register
+		case 0x12: 			//	If Accumulator == 0, Jump from reg Addr
+		{
+			if(state->sr.az)
+				{
+					unsigned short * ad = &state->a;
+					ad += opcode->p1;
+					state->pc = *ad;
+				}
+			break;
+		};
+		case 0x13: 			//	If Accumulator != 0, Jump from reg Addr
+		{
+			if(state->sr.nz)
+				{
+					unsigned short * ad = &state->a;
+					ad += opcode->p1;
+					state->pc = *ad;
+				}
+			break;
+		};
+		case 0x14: 			//	If Accumulator Carry, Jump from reg Addr
+		{
+			if(state->sr.ac)
+				{
+					unsigned short * ad = &state->a;
+					ad += opcode->p1;
+					state->pc = *ad;
+				}
+			break;
+		};
+		case 0x15: 			//	Increment Register
 		{
 			unsigned short * ad = &state->a;
 			ad += opcode->p1;
 			(*ad)++;
 			break;
 		};
-		case 0x13: 			//	Decrement Register
+		case 0x16: 			//	Decrement Register
 		{
 			unsigned short * ad = &state->a;
 			ad += opcode->p1;
@@ -259,6 +292,14 @@ int EmulateH32(StateH32* state, int offset, queue<char> &inputBuffer, vector<str
 		break;
 	case 4:
 		temporary = state->a + state->b;
+		break;
+	case 5:
+		break;
+	case 6:
+		temporary = state->a > state->b;
+		break;
+	case 7:
+		temporary = state->a < state->b;
 		break;
 	case 8:
 		temporary = (state->a >> state->b) | (state->a << (INT_BITS - state->b));
@@ -320,6 +361,7 @@ int main (int argc, char**argv)
 	printf("\033[32m\n");
 
 	int offset = stoi(argv[2]);
+	bool output = argv[3];
 
 	int done = 0;
 	int vblankcycles = 0;
@@ -330,10 +372,15 @@ int main (int argc, char**argv)
 	ReadFileIntoRomAt(state, argv[1], 0);
 	//ReadFileIntoMemoryAt(state, "invaders.g", 0x800);
 	
-	print_window(state, h_buffer);
+	print_window(state, h_buffer, offset, output);
 	while (done == 0)
 	{
-		done = EmulateH32(state, offset, inputbuffer, h_buffer);
+		done = EmulateH32(state, offset, inputbuffer, h_buffer, output);
+		if (output) 
+		{
+			print_window(state, h_buffer, offset, output);
+			printf("\n");
+		}
 	}
 	return 0;
 }
